@@ -1,0 +1,29 @@
+{
+  "id": "16383ae5-b8d6-4cce-8595-fbb21012c83e",
+  "type": "music_generation",
+  "status": "completed",
+  "projectId": "b8075a52-1a6f-4489-ba6d-f1d5bc7c4e7e",
+  "progress": 1.0,
+  "log": [
+    {
+      "message": "ACE-Step API generated audio files and they were imported.",
+      "createdAt": "2026-05-18 20:13:49.358194"
+    }
+  ],
+  "result": {
+    "mode": "lyrics_only",
+    "lyricsVersion": "lyrics_v1",
+    "seed": 1234,
+    "promptFileId": "ace_step_prompt_003",
+    "musicPlanFileId": "music_plan_003",
+    "audioFileIds": [
+      "generated_002"
+    ],
+    "status": "completed",
+    "engine": "ace-step-api",
+    "musicPlanEngine": "ace-step-lm"
+  },
+  "error": null,
+  "createdAt": "2026-05-18 20:13:24.446717",
+  "updatedAt": "2026-05-18 20:13:49.358198"
+}

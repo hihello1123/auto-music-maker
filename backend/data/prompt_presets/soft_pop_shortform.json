@@ -1,0 +1,26 @@
+{
+  "id": "soft_pop_shortform",
+  "label": "Soft Pop Shortform",
+  "matchGenres": [
+    "soft pop",
+    "shortform pop",
+    "pop shortform"
+  ],
+  "blueprintGuidance": [
+    "Front-load the hook and keep the form compact.",
+    "Write for immediate recognition in the first 10 seconds.",
+    "Keep the emotional tone gentle and direct."
+  ],
+  "generationGuidance": [
+    "Make the chorus the center of gravity.",
+    "Prefer a concise intro and minimal verse buildup.",
+    "Use clean drums, simple bass, and light atmospheric layers."
+  ],
+  "avoidGuidance": [
+    "Avoid long instrumental sections.",
+    "Avoid overcomplicated melodic turns."
+  ],
+  "defaultBpm": 92,
+  "defaultKey": "G major",
+  "defaultDuration": 30
+}

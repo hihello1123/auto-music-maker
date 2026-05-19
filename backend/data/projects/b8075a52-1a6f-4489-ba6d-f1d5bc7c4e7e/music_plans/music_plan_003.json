@@ -1,0 +1,14 @@
+{
+  "musicPlanFileId": null,
+  "sourcePrompt": "You are shaping a production-ready song blueprint for a local AI song studio.\nReturn concise metadata and a polished song caption only.\nPreserve the original lyric meaning and do not invent unrelated story details.\nProject: Still In The Rain\nTheme: 밤이 조용할수록 잊은 줄 알았던 목소리가 더 선명해진다\nGenre: emotional pop ballad\nTarget BPM: 85\nTarget Key: C minor\nTarget Duration: 60s\nMode: lyrics_only\nLyrics:\n[Verse 1]\nI still hear your name in the rain\nEvery quiet street keeps calling you back\n[Chorus]\nThe night keeps holding what I tried to hide\nI still remember you inside the light\nOutput fields: caption, lyrics, bpm, keyscale, duration, timesignature, language.",
+  "caption": "'A polished pop ballad opens with a gentle digital piano and a clear, emotive female vocal. A clean, steady drum machine beat and a smooth bassline enter, establishing a contemporary pop groove. The chorus expands with layered vocal harmonies and a bilingual twist, as the lyrics switch to French over the driving beat. A melodic, clean-toned acoustic guitar solo provides an instrumental break before the song de-escalates into a softer, more intimate final verse. The track concludes with a starkly contrasting outro: a sparse, melancholic piano and a breathy, whispered vocal performance that fades into silence.'",
+  "lyrics": "[Verse 1]\nI still hear your name in the rain\nEvery quiet street keeps calling you back\n\n[Chorus]\nThe night keeps holding what I tried to hide\nI still remember you inside the light",
+  "genre": "emotional pop ballad",
+  "bpm": 85,
+  "key": "C minor",
+  "duration": 60,
+  "timeSignature": "4",
+  "language": "en",
+  "engine": "ace-step-lm",
+  "createdAt": "2026-05-18 20:13:29.318210"
+}

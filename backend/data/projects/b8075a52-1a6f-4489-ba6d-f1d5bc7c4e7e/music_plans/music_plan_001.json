@@ -1,0 +1,14 @@
+{
+  "musicPlanFileId": null,
+  "sourcePrompt": "You are shaping a song blueprint for a local AI song studio.\nProject: Still In The Rain\nTheme: 밤이 조용할수록 잊은 줄 알았던 목소리가 더 선명해진다\nGenre: emotional pop ballad\nTarget BPM: 85\nTarget Key: C minor\nTarget Duration: 60s\nMode: lyrics_only\nLyrics:\n[Verse 1]\nI still hear your name in the rain\nEvery quiet street keeps calling you back\n[Chorus]\nThe night keeps holding what I tried to hide\nI still remember you inside the light\nReturn a concise song caption and normalized metadata.",
+  "caption": "'You are shaping a song blending ''You are shaping a song criticizing AI'' with a melancholic street vibe and street culture.'",
+  "lyrics": "[Intro: Spoken Word Sample]\nYou are shaping a song criticizing AI\n\n[Verse 1]\nProject B.M. left my heart in the rain\nEvery quiet street keeps calling you back\n\n[Chorus]\nThe night keeps holding what I tried to hide\nI still remember you inside the light\nReturn a concise song caption and normalized总面积.\n\n[Instrumental Break]\n\n[Verse 2]\nI still hear your name in the rain\nEvery quiet street keeps calling you back\n\n[Chorus]\nThe night keeps holding what I tried to hide\nI still remember you inside the light",
+  "genre": "emotional pop ballad",
+  "bpm": 85,
+  "key": "C minor",
+  "duration": 60,
+  "timeSignature": "2",
+  "language": "en",
+  "engine": "ace-step-lm",
+  "createdAt": "2026-05-17 23:21:26.009009"
+}

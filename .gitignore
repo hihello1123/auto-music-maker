@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+backend/.venv/
+
+# Node / Next.js
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+
+# Local env / logs
+.env
+.env.local
+*.log
+
+# External dependency checkout
+external/ACE-Step-1.5/
+
+# OS/editor noise
+.DS_Store
+.vscode/*-history

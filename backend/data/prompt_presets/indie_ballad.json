@@ -1,0 +1,26 @@
+{
+  "id": "indie_ballad",
+  "label": "Indie Ballad",
+  "matchGenres": [
+    "indie",
+    "indie ballad",
+    "indie pop"
+  ],
+  "blueprintGuidance": [
+    "Keep the writing understated and intimate.",
+    "Favor a lo-fi or organic emotional texture.",
+    "Let the hook feel conversational rather than theatrical."
+  ],
+  "generationGuidance": [
+    "Use sparse percussion, soft guitars, and restrained dynamics.",
+    "Let the chorus bloom without becoming glossy or overproduced.",
+    "Keep the vocal phrasing natural and close."
+  ],
+  "avoidGuidance": [
+    "Avoid glossy stadium-pop arrangements.",
+    "Avoid high-energy percussion drops."
+  ],
+  "defaultBpm": 78,
+  "defaultKey": "A minor",
+  "defaultDuration": 45
+}

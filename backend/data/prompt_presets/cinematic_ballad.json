@@ -1,0 +1,26 @@
+{
+  "id": "cinematic_ballad",
+  "label": "Cinematic Ballad",
+  "matchGenres": [
+    "cinematic",
+    "cinematic ballad",
+    "epic ballad"
+  ],
+  "blueprintGuidance": [
+    "Create a sense of scale while keeping the emotional center clear.",
+    "Use a larger chorus lift and a strong dynamic arc.",
+    "Keep the core hook memorable even at short duration."
+  ],
+  "generationGuidance": [
+    "Use swelling pads, reverb tails, and wide stereo support.",
+    "Build tension gently, then release into a broad chorus.",
+    "Keep the final refrain emotionally bigger than the opening."
+  ],
+  "avoidGuidance": [
+    "Avoid excessive percussion clutter.",
+    "Avoid muddy low-end or overlong intros."
+  ],
+  "defaultBpm": 72,
+  "defaultKey": "D minor",
+  "defaultDuration": 45
+}

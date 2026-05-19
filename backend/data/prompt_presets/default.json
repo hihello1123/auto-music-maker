@@ -1,0 +1,20 @@
+{
+  "id": "default",
+  "label": "Default",
+  "matchGenres": [],
+  "blueprintGuidance": [
+    "Keep the song emotionally coherent and simple to sing.",
+    "Prefer one clear hook and stable harmony."
+  ],
+  "generationGuidance": [
+    "Use tasteful instrumentation and avoid over-arrangement.",
+    "Keep the groove clear and the vocal melody memorable."
+  ],
+  "avoidGuidance": [
+    "Avoid abrupt genre switches.",
+    "Avoid overly busy fills or chaotic layering."
+  ],
+  "defaultBpm": 84,
+  "defaultKey": "C minor",
+  "defaultDuration": 45
+}
