@@ -65,3 +65,7 @@ NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:12000
 - 백엔드/프런트 목표는 `docs/planning/backend/overview.md`와 `docs/planning/frontend/overview.md`로 분리했습니다.
 - 공통 원칙은 `docs/planning/shared/`에 둡니다.
 - 구현 원칙은 각 기능 문서에만 남기고, 루트 README는 진입점만 제공합니다.
+
+## 라이선스
+
+MIT License. 자세한 내용은 [`LICENSE`](./LICENSE)를 봅니다.
