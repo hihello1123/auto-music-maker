@@ -1,11 +1,21 @@
 # Backend API
 
-FastAPI 기반 로컬 AI Song Studio 백엔드입니다. 작업 목표와 티켓은 [`docs/planning/backend/`](../docs/planning/backend/)를 기준으로 봅니다.
+로컬 AI Song Studio의 FastAPI 백엔드입니다.
+
+## 역할
+
+- 프로젝트 메타데이터 관리
+- 가사 생성과 저장
+- 프롬프트 프리셋 조회
+- 곡 스펙 생성
+- 음악 생성 요청
+- 오디오 / LRC / publish 정보 관리
+- job 상태 관리
 
 ## 요구 사항
 
 - Python 3.11
-- [uv](https://github.com/astral-sh/uv) 패키지 매니저
+- [uv](https://github.com/astral-sh/uv)
 
 ## 설치
 
@@ -15,25 +25,33 @@ uv python install 3.11
 uv sync
 ```
 
-## 환경 변수 설정
+## 환경 변수
 
 ```bash
 cp .env.example .env
 ```
 
-`.env` 파일을 편집하여 서버 설정을 변경할 수 있습니다.
+필수 또는 주요 값:
 
-ACE-Step를 실제 API 서버로 연결하려면 `ACE_STEP_API_URL=http://127.0.0.1:8001` 를 넣습니다.
-로컬 단독 사용이면 `ACE_STEP_API_KEY` 는 비워도 됩니다.
-곡 스펙까지 ACE-Step LM으로 정리하려면 ACE-Step API 서버를 `ACESTEP_INIT_LLM=true` 와 LM 모델 경로로 실행해야 합니다.
+- `HOST=127.0.0.1`
+- `PORT=12000`
+- `RELOAD=true`
+- `CORS_ORIGINS=["http://localhost:3000"]`
+- `OLLAMA_URL=http://localhost:11434`
+- `OLLAMA_MODEL=mistral-small3.2:24b`
+- `OLLAMA_TIMEOUT=0`
+- `ACE_STEP_API_URL=http://127.0.0.1:12001`
 
-## 환경 변수 요약
+ACE-Step 관련 선택값:
 
-- 필수: `HOST`, `PORT`, `RELOAD`, `CORS_ORIGINS`
-- 가사 생성: `OLLAMA_URL`, `OLLAMA_MODEL`, `OLLAMA_TIMEOUT` (`0` 또는 비워두면 무제한)
-- ACE-Step 로컬 API: `ACE_STEP_API_URL`
-- ACE-Step 선택 항목: `ACE_STEP_API_KEY`, `ACE_STEP_API_MODEL`, `ACE_STEP_API_POLL_INTERVAL`
-- CLI fallback: `ACE_STEP_CMD_TEMPLATE`, `ACE_STEP_TIMEOUT`
+- `ACE_STEP_API_KEY`
+- `ACE_STEP_API_MODEL`
+- `ACE_STEP_API_POLL_INTERVAL`
+
+CLI fallback:
+
+- `ACE_STEP_CMD_TEMPLATE`
+- `ACE_STEP_TIMEOUT`
 
 ## 실행
 
@@ -41,47 +59,37 @@ ACE-Step를 실제 API 서버로 연결하려면 `ACE_STEP_API_URL=http://127.0.
 uv run uvicorn app.main:app --host 127.0.0.1 --port 12000 --reload
 ```
 
-또는 Python 스크립트로 직접 실행:
+## 주요 엔드포인트
 
-```bash
-uv run python -m app.main
-```
+- `GET /health`
+- `GET /projects`
+- `POST /projects`
+- `GET /projects/{id}`
+- `PATCH /projects/{id}`
+- `DELETE /projects/{id}`
+- `GET /prompt-presets`
+- `GET /prompt-presets/{preset_id}`
+- `GET /jobs/{id}`
+- `POST /projects/{id}/lyrics/generate`
+- `POST /projects/{id}/lyrics/save`
+- `POST /projects/{id}/files/upload-vocal`
+- `GET /projects/{id}/audio`
+- `GET /projects/{id}/audio/{audio_id}`
+- `POST /projects/{id}/music/spec/generate`
+- `POST /projects/{id}/music/generate`
+- `POST /projects/{id}/lrc/generate`
+- `POST /projects/{id}/lrc/save`
+- `POST /projects/{id}/publish-info/generate`
 
-## 엔드포인트
+## 저장 위치
 
-| 메서드 | 경로             | 설명             |
-|--------|------------------|------------------|
-| GET    | `/health`        | 헬스 체크        |
-| GET    | `/projects`      | 프로젝트 목록    |
-| POST   | `/projects`      | 프로젝트 생성    |
-| GET    | `/projects/{id}` | 프로젝트 상세    |
-| PATCH  | `/projects/{id}` | 프로젝트 수정    |
-| DELETE | `/projects/{id}` | 프로젝트 삭제    |
-| GET    | `/prompt-presets` | 프롬프트 프리셋 목록 |
-| GET    | `/prompt-presets/{preset_id}` | 프롬프트 프리셋 상세 |
-| GET    | `/jobs/{id}`     | job 상세 조회    |
-| POST   | `/projects/{id}/lyrics/generate` | 가사 생성 |
-| POST   | `/projects/{id}/lyrics/save` | 가사 저장 |
-| POST   | `/projects/{id}/files/upload-vocal` | 보컬 업로드 |
-| GET    | `/projects/{id}/audio` | 오디오 목록 |
-| GET    | `/projects/{id}/audio/{audio_id}` | 오디오 다운로드 |
-| POST   | `/projects/{id}/music/spec/generate` | 곡 스펙 생성 |
-| POST   | `/projects/{id}/music/generate` | 음악 생성 요청 |
-| POST   | `/projects/{id}/lrc/generate` | LRC 생성 |
-| POST   | `/projects/{id}/lrc/save` | LRC 저장 |
-| POST   | `/projects/{id}/publish-info/generate` | publish 정보 생성 |
+- `backend/data/projects/{project_id}/`
+- `lyrics/`
+- `prompts/`
+- `music_plans/`
+- `vocals/`
+- `audio/`
+- `lrc/`
+- `video/`
+- `metadata/`
 
-현재 구현된 기본 자원은 프로젝트 API입니다. 나머지 기능은 기획 문서의 티켓 순서에 맞춰 순차적으로 확장합니다.
-
-## 프로젝트 구조
-
-```
-backend/
-├── pyproject.toml
-├── .env.example
-├── README.md
-└── app/
-    ├── __init__.py
-    ├── main.py
-    └── config.py
-```
