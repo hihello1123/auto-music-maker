@@ -1,0 +1,29 @@
+{
+  "id": "rock_ballad",
+  "label": "Rock Ballad",
+  "matchGenres": [
+    "rock",
+    "rock ballad",
+    "pop rock",
+    "soft rock",
+    "alternative rock"
+  ],
+  "blueprintGuidance": [
+    "Represent rock ballad: emotional vocal, guitar-led build, strong chorus, and controlled band dynamics.",
+    "Keep the hook broad and singable without becoming metal or punk.",
+    "Use mood input for heartbreak, rain, night, regret, hope, or cathartic direction."
+  ],
+  "generationGuidance": [
+    "Use clean electric guitar or acoustic guitar in the verse, warm bass, steady live drums, and wider guitars in the chorus.",
+    "Build through dynamics rather than speed; let the chorus feel open and band-driven.",
+    "Keep the vocal forward and avoid masking it with distorted guitars.",
+    "For short-form output, start near the pre-chorus or chorus energy."
+  ],
+  "avoidGuidance": [
+    "Avoid metal double-kick drums, harsh distortion walls, and overly busy guitar solos.",
+    "Avoid EDM synth drops or trap percussion."
+  ],
+  "defaultBpm": 78,
+  "defaultKey": "E minor",
+  "defaultDuration": 45
+}

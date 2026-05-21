@@ -1,0 +1,31 @@
+{
+  "id": "rnb_soul",
+  "label": "R&B / Soul",
+  "matchGenres": [
+    "rnb",
+    "r&b",
+    "rnb soul",
+    "r&b soul",
+    "soul",
+    "neo soul",
+    "slow jam"
+  ],
+  "blueprintGuidance": [
+    "Represent R&B and soul: groove pocket, smooth harmony, vocal phrasing, and intimate emotional control.",
+    "Keep the hook warm, repeatable, and rhythmically relaxed.",
+    "Use mood input for late-night, sensual, lonely, or bittersweet color."
+  ],
+  "generationGuidance": [
+    "Use electric piano, warm sub or electric bass, tight low-volume drums, snaps, soft pads, and sparse guitar accents.",
+    "Keep the rhythm pocketed with subtle syncopation and smooth bass movement.",
+    "Use tasteful harmony layers at hook emphasis points while keeping the lead vocal forward.",
+    "Add small ad-lib responses near the final repeat only."
+  ],
+  "avoidGuidance": [
+    "Avoid trap-dominant hi-hat rolls, aggressive 808 slides, and club energy.",
+    "Avoid rock guitars, cinematic strings, and bright pop leads."
+  ],
+  "defaultBpm": 74,
+  "defaultKey": "F minor",
+  "defaultDuration": 45
+}

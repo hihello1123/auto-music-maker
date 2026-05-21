@@ -26,6 +26,7 @@ class MusicGenerateRequest(BaseModel):
     promptPresetId: str | None = None
     songStructure: str = "chorus_only"
     genre: str | None = None
+    mood: str | None = None
     bpm: int | None = None
     key: str | None = None
     duration: int = 60

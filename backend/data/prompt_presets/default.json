@@ -1,20 +1,28 @@
 {
   "id": "default",
-  "label": "Default",
-  "matchGenres": [],
+  "label": "Pop",
+  "matchGenres": [
+    "pop",
+    "mainstream pop",
+    "k-pop",
+    "kpop"
+  ],
   "blueprintGuidance": [
-    "Keep the song emotionally coherent and simple to sing.",
-    "Prefer one clear hook and stable harmony."
+    "Represent modern pop: clear hook, clean structure, accessible melody, and polished production.",
+    "Keep the chorus simple enough to remember after one listen.",
+    "Use the separate mood field for emotional color instead of changing the genre identity."
   ],
   "generationGuidance": [
-    "Use tasteful instrumentation and avoid over-arrangement.",
-    "Keep the groove clear and the vocal melody memorable."
+    "Use clean drums, supportive bass, polished keys or synths, and a focused lead vocal.",
+    "Keep the arrangement balanced and radio-ready without crowding the hook.",
+    "Make transitions clean and predictable: intro, hook arrival, short development, ending.",
+    "For short-form output, make the hook appear early and stay easy to loop."
   ],
   "avoidGuidance": [
-    "Avoid abrupt genre switches.",
-    "Avoid overly busy fills or chaotic layering."
+    "Avoid random genre switching, long intros, and excessive instrumental solos.",
+    "Avoid muddy low-end, harsh cymbals, and stacked parts that hide the vocal."
   ],
-  "defaultBpm": 84,
-  "defaultKey": "C minor",
-  "defaultDuration": 45
+  "defaultBpm": 96,
+  "defaultKey": "G major",
+  "defaultDuration": 40
 }

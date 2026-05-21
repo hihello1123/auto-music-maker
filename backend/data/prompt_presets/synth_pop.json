@@ -1,0 +1,29 @@
+{
+  "id": "synth_pop",
+  "label": "Synth Pop",
+  "matchGenres": [
+    "synth pop",
+    "synthpop",
+    "electropop",
+    "electro pop",
+    "retro synth pop"
+  ],
+  "blueprintGuidance": [
+    "Represent synth pop: electronic groove, clean hooks, bright melodic synth identity, and polished vocal production.",
+    "Keep the chorus direct and rhythmically clear.",
+    "Use mood input for neon, dreamy, lonely, futuristic, nostalgic, or night-drive color."
+  ],
+  "generationGuidance": [
+    "Use electronic drums, pulsing synth bass, arpeggiated or plucked synths, soft pads, and polished lead vocal.",
+    "Keep the groove steady and the hook easy to loop.",
+    "Use vocal doubles or harmony only at hook emphasis points.",
+    "Make the ending cleanly cuttable for short-form use."
+  ],
+  "avoidGuidance": [
+    "Avoid aggressive club drops, harsh supersaws, overloaded percussion, and muddy low-end.",
+    "Avoid acoustic folk or piano-ballad arrangement choices."
+  ],
+  "defaultBpm": 104,
+  "defaultKey": "G major",
+  "defaultDuration": 40
+}

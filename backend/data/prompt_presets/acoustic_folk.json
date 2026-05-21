@@ -1,0 +1,30 @@
+{
+  "id": "acoustic_folk",
+  "label": "Acoustic Folk",
+  "matchGenres": [
+    "acoustic",
+    "folk",
+    "acoustic folk",
+    "folk ballad",
+    "singer songwriter",
+    "singer-songwriter"
+  ],
+  "blueprintGuidance": [
+    "Represent acoustic folk: lyric-first writing, natural performance, and simple harmonic movement.",
+    "Keep the hook plainspoken and memorable.",
+    "Use mood input for warmth, loneliness, road, room, rain, morning, or nostalgia."
+  ],
+  "generationGuidance": [
+    "Use fingerpicked or softly strummed acoustic guitar, light piano accents, gentle room percussion, and warm natural vocal tone.",
+    "Keep the arrangement small, human, and centered on the words.",
+    "Add subtle harmony only in the hook or final repeat.",
+    "Avoid long intros and enter with guitar plus vocal quickly for short-form output."
+  ],
+  "avoidGuidance": [
+    "Avoid glossy pop drums, dominant synth pads, cinematic strings, and heavy bass.",
+    "Avoid dramatic modulations or full-band rock-ballad energy."
+  ],
+  "defaultBpm": 80,
+  "defaultKey": "G major",
+  "defaultDuration": 45
+}

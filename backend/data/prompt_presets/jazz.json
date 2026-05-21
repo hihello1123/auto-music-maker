@@ -1,0 +1,29 @@
+{
+  "id": "jazz",
+  "label": "Jazz",
+  "matchGenres": [
+    "jazz",
+    "jazz ballad",
+    "vocal jazz",
+    "smooth jazz",
+    "jazz pop"
+  ],
+  "blueprintGuidance": [
+    "Represent jazz: harmonic color, spacious phrasing, swing or brushed groove, and live-room intimacy.",
+    "Keep the vocal melody central and avoid turning the track into a long instrumental showcase.",
+    "Use mood input for bar, rain, midnight, noir, warm, or lonely details."
+  ],
+  "generationGuidance": [
+    "Use brushed drums, upright or warm electric bass, piano or Rhodes, soft ride cymbal, and optional muted horn or sax fills.",
+    "Use tasteful 7th or 9th chord color while keeping the form accessible.",
+    "Leave space between phrases and keep instrumental fills shorter than the vocal hook.",
+    "For short-form output, start close to the main vocal section rather than a long lounge intro."
+  ],
+  "avoidGuidance": [
+    "Avoid bebop complexity, fast walking bass, busy solos, or scatting.",
+    "Avoid EDM pads, pop-rock drums, and bright synth leads."
+  ],
+  "defaultBpm": 68,
+  "defaultKey": "C minor",
+  "defaultDuration": 45
+}

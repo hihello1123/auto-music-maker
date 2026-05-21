@@ -4,6 +4,17 @@ from datetime import datetime
 from app.models.prompt_preset import PromptPreset
 from app.storage import prompt_preset_store
 
+PRESET_ALIASES = {
+    "emotional_pop_ballad": "pop_ballad",
+    "indie_ballad": "indie_pop",
+    "rnb_soul_ballad": "rnb_soul",
+    "jazz_bar_ballad": "jazz",
+    "city_pop_night": "city_pop",
+    "acoustic_folk_ballad": "acoustic_folk",
+    "cinematic_ballad": "orchestral_pop",
+    "soft_pop_shortform": "synth_pop",
+}
+
 
 def _normalize(value: str | None) -> str:
     if not value:
@@ -30,7 +41,7 @@ def resolve_prompt_preset(genre: str | None = None, preset_id: str | None = None
         )
 
     if preset_id:
-        preset = get_prompt_preset(preset_id)
+        preset = get_prompt_preset(PRESET_ALIASES.get(preset_id, preset_id))
         if preset:
             return preset
 

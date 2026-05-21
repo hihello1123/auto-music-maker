@@ -29,6 +29,8 @@ def build_blueprint_prompt(
         parts.append(f"Theme: {project_theme}")
     if request_data.genre:
         parts.append(f"Genre: {request_data.genre}")
+    if request_data.mood:
+        parts.append(f"Mood: {request_data.mood}")
     if request_data.bpm is not None:
         parts.append(f"Target BPM: {request_data.bpm}")
     if request_data.key:
@@ -62,16 +64,18 @@ def build_prompt(
 ) -> str:
     parts = [
         "You are generating a polished, release-quality song demo for a local AI song studio.",
-        "Focus on a memorable hook, emotional coherence, and clean arrangement flow.",
-        "Use intimate verses, a wider chorus, and a controlled bridge.",
-        "Instrumentation should stay tasteful and focused: piano, soft drums, warm bass, airy pads, and subtle textures.",
-        "Avoid chaotic layering, abrupt genre switches, excessive percussion, and overly busy fills.",
+        "Follow the selected genre preset closely; it defines the arrangement, groove, and production texture.",
+        "Focus on a memorable hook, emotional coherence, clean arrangement flow, and release-ready balance.",
+        "Keep the arrangement intentional: every instrument should support the vocal and central hook.",
+        "Avoid chaotic layering, abrupt genre switches, muddy low-end, and overly busy fills.",
         f"Project: {project_title}",
     ]
     if project_theme:
         parts.append(f"Theme: {project_theme}")
     if request_data.genre:
         parts.append(f"Genre: {request_data.genre}")
+    if request_data.mood:
+        parts.append(f"Mood: {request_data.mood}")
     if request_data.bpm is not None:
         parts.append(f"BPM: {request_data.bpm}")
     if request_data.key:
@@ -95,7 +99,7 @@ def build_prompt(
     parts.append(f"Preserve melody: {request_data.preserveMelody}")
     parts.append("Lyrics:")
     parts.append(lyrics_content.strip())
-    parts.append("Aim for a warm emotional ballad with a strong singable refrain.")
+    parts.append("Aim for a strong singable refrain that matches the selected genre preset.")
     return "\n".join(parts)
 
 

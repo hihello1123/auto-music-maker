@@ -1,0 +1,29 @@
+{
+  "id": "lofi_pop",
+  "label": "Lo-fi Pop",
+  "matchGenres": [
+    "lofi",
+    "lo-fi",
+    "lofi pop",
+    "lo-fi pop",
+    "chill pop"
+  ],
+  "blueprintGuidance": [
+    "Represent lo-fi pop: relaxed groove, intimate vocal, simple hook, and warm imperfect texture.",
+    "Keep the song small and easy to sit with.",
+    "Use mood input for rainy, sleepy, nostalgic, bedroom, late-night, or lonely direction."
+  ],
+  "generationGuidance": [
+    "Use soft drums, dusty percussion, warm bass, muted keys or guitar, subtle vinyl or tape texture, and close vocal tone.",
+    "Keep the arrangement sparse and loop-friendly.",
+    "Let the hook repeat gently without a dramatic lift.",
+    "Use soft ambience and avoid overly bright high-end."
+  ],
+  "avoidGuidance": [
+    "Avoid glossy radio-pop polish, cinematic swells, heavy drums, and bright synth leads.",
+    "Avoid complex chord movement that distracts from the relaxed groove."
+  ],
+  "defaultBpm": 82,
+  "defaultKey": "A minor",
+  "defaultDuration": 40
+}

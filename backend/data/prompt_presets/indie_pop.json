@@ -1,0 +1,28 @@
+{
+  "id": "indie_pop",
+  "label": "Indie Pop",
+  "matchGenres": [
+    "indie",
+    "indie pop",
+    "indie ballad",
+    "bedroom pop"
+  ],
+  "blueprintGuidance": [
+    "Represent indie pop: understated emotion, natural phrasing, and organic texture.",
+    "Prefer conversational hooks over theatrical pop slogans.",
+    "Use the separate mood field for the scene or emotional direction."
+  ],
+  "generationGuidance": [
+    "Use clean or lightly driven guitar, small-room drums, round bass, simple keys, and close vocal tone.",
+    "Keep the groove relaxed and slightly human rather than glossy and quantized.",
+    "Let the chorus bloom with one or two added layers, not a full stadium-pop lift.",
+    "Use warm room ambience and simple chord motion."
+  ],
+  "avoidGuidance": [
+    "Avoid glossy radio-pop drums, cinematic strings, huge reverbs, and aggressive bass.",
+    "Avoid high-energy drops or bright synth hooks that erase the indie identity."
+  ],
+  "defaultBpm": 84,
+  "defaultKey": "A minor",
+  "defaultDuration": 45
+}

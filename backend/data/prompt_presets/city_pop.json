@@ -1,0 +1,29 @@
+{
+  "id": "city_pop",
+  "label": "City Pop",
+  "matchGenres": [
+    "city pop",
+    "citypop",
+    "retro pop",
+    "80s pop",
+    "urban pop"
+  ],
+  "blueprintGuidance": [
+    "Represent city pop: glossy retro-pop harmony, smooth groove, melodic chorus, and stylish nostalgia.",
+    "Keep the mood polished and urban without becoming parody.",
+    "Use mood input for night drive, neon, rain, beach, summer, or bittersweet direction."
+  ],
+  "generationGuidance": [
+    "Use tight clean drums, electric bass, glossy electric piano, chorus guitar, restrained brass stabs, and analog synth support.",
+    "Keep the groove mid-tempo and buoyant with a smooth pre-chorus lift.",
+    "Use clean stereo width and polished vocal ambience without burying the lead.",
+    "Bring the hook in early for short-form output."
+  ],
+  "avoidGuidance": [
+    "Avoid modern EDM drops, trap drums, heavy distortion, and overly sad ballad pacing.",
+    "Avoid long instrumental solos before the hook."
+  ],
+  "defaultBpm": 104,
+  "defaultKey": "A minor",
+  "defaultDuration": 45
+}

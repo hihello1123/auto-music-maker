@@ -24,7 +24,8 @@ const DEFAULT_REQUEST: MusicGenerateRequest = {
   lyricsVersion: "",
   promptPresetId: "",
   songStructure: "chorus_only",
-  genre: "emotional pop ballad",
+  genre: "Pop",
+  mood: "",
   bpm: 85,
   key: "C minor",
   duration: 45,
@@ -46,6 +47,17 @@ const KEY_MODE_OPTIONS = [
 ];
 
 const KEY_TONIC_OPTIONS = ["C", "C#", "Db", "D", "D#", "Eb", "E", "F", "F#", "Gb", "G", "G#", "Ab", "A", "A#", "Bb", "B"];
+
+const PRESET_ALIASES: Record<string, string> = {
+  emotional_pop_ballad: "pop_ballad",
+  indie_ballad: "indie_pop",
+  rnb_soul_ballad: "rnb_soul",
+  jazz_bar_ballad: "jazz",
+  city_pop_night: "city_pop",
+  acoustic_folk_ballad: "acoustic_folk",
+  cinematic_ballad: "orchestral_pop",
+  soft_pop_shortform: "synth_pop",
+};
 
 function formatCount(value: number, label: string) {
   return `${label} ${value}개`;
@@ -83,6 +95,13 @@ function parseKeyValue(value: string | null | undefined) {
   };
 }
 
+function resolvePresetId(presetId: string | null | undefined) {
+  if (!presetId) {
+    return "";
+  }
+  return PRESET_ALIASES[presetId] ?? presetId;
+}
+
 export default function Page() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [presets, setPresets] = useState<PromptPreset[]>([]);
@@ -113,11 +132,12 @@ export default function Page() {
         const defaultPresetId = loadedPresets.find((preset) => preset.id === "default")?.id ?? loadedPresets[0]?.id ?? "";
 
         if (loadedProjects[0]) {
+          const initialPresetId = resolvePresetId(loadedProjects[0].selectedPromptPreset ?? defaultPresetId);
           setSelectedProjectId(loadedProjects[0].id);
           setRequest((current) => ({
             ...current,
             lyricsVersion: loadedProjects[0].selectedLyricsVersion ?? current.lyricsVersion,
-            promptPresetId: loadedProjects[0].selectedPromptPreset ?? defaultPresetId ?? current.promptPresetId,
+            promptPresetId: initialPresetId || current.promptPresetId,
             genre: loadedProjects[0].genre ?? current.genre,
             bpm: loadedProjects[0].bpm ?? current.bpm,
             key: loadedProjects[0].key ?? current.key,
@@ -153,7 +173,7 @@ export default function Page() {
       lyricsVersion: current.lyricsVersion || selectedProject.selectedLyricsVersion || selectedProject.assets.lyricsVersions[0]?.id || "",
       promptPresetId:
         current.promptPresetId ||
-        selectedProject.selectedPromptPreset ||
+        resolvePresetId(selectedProject.selectedPromptPreset) ||
         presets.find((preset) => preset.id === "default")?.id ||
         presets[0]?.id ||
         "",
@@ -166,7 +186,7 @@ export default function Page() {
   }, [selectedProject, presets]);
 
   const selectedPreset = useMemo(
-    () => presets.find((preset) => preset.id === request.promptPresetId) ?? null,
+    () => presets.find((preset) => preset.id === resolvePresetId(request.promptPresetId)) ?? null,
     [presets, request.promptPresetId],
   );
 
@@ -191,7 +211,7 @@ export default function Page() {
       ...current,
       lyricsVersion: project.selectedLyricsVersion || project.assets.lyricsVersions[0]?.id || "",
       promptPresetId:
-        project.selectedPromptPreset ||
+        resolvePresetId(project.selectedPromptPreset) ||
         current.promptPresetId ||
         presets.find((preset) => preset.id === "default")?.id ||
         presets[0]?.id ||
@@ -205,6 +225,22 @@ export default function Page() {
     setMusicPlan(null);
     setMusicResult(null);
     setLyricsLanguage(project.language || "en");
+  }
+
+  function applyGenrePreset(presetId: string) {
+    const resolvedPresetId = resolvePresetId(presetId);
+    const preset = presets.find((item) => item.id === resolvedPresetId);
+    const parsedKey = parseKeyValue(preset?.defaultKey || request.key || "C minor");
+    setKeyTonic(parsedKey.tonic);
+    setKeyMode(parsedKey.mode);
+    setRequest((current) => ({
+      ...current,
+      promptPresetId: resolvedPresetId,
+      genre: preset?.label ?? current.genre,
+      bpm: preset?.defaultBpm ?? current.bpm,
+      key: `${parsedKey.tonic} ${parsedKey.mode}`,
+      duration: preset?.defaultDuration ?? current.duration,
+    }));
   }
 
   async function refreshProjects(nextSelectedProjectId: string) {
@@ -572,10 +608,10 @@ export default function Page() {
 
             <div className="admin-form-grid">
               <label>
-                <span>프롬프트 프리셋</span>
+                <span>장르</span>
                 <select
-                  value={request.promptPresetId ?? ""}
-                  onChange={(event) => setRequest((current) => ({ ...current, promptPresetId: event.target.value }))}
+                  value={resolvePresetId(request.promptPresetId)}
+                  onChange={(event) => applyGenrePreset(event.target.value)}
                 >
                   {presets.map((preset) => (
                     <option key={preset.id} value={preset.id}>
@@ -623,11 +659,11 @@ export default function Page() {
               </label>
 
               <label>
-                <span>장르</span>
-                <input
-                  value={request.genre ?? ""}
-                  onChange={(event) => setRequest((current) => ({ ...current, genre: event.target.value }))}
-                  placeholder="감성 팝 발라드"
+                <span>분위기</span>
+                <textarea
+                  value={request.mood ?? ""}
+                  onChange={(event) => setRequest((current) => ({ ...current, mood: event.target.value }))}
+                  placeholder="비 오는 밤, 재즈바, 독한 술, 조용하고 쓸쓸한 느낌"
                 />
               </label>
 
@@ -755,7 +791,7 @@ export default function Page() {
 
             <div className="inline-panel">
               <div className="admin-panel-head">
-                <h2>프롬프트 프리셋</h2>
+                <h2>장르 프리셋</h2>
                 <span>{selectedPreset?.id ?? "없음"}</span>
               </div>
               {selectedPreset ? (

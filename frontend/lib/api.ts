@@ -78,6 +78,7 @@ export type MusicGenerateRequest = {
   promptPresetId?: string | null;
   songStructure?: string;
   genre?: string | null;
+  mood?: string | null;
   bpm?: number | null;
   key?: string | null;
   duration: number;

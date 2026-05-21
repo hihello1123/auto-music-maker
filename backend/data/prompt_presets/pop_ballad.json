@@ -1,0 +1,29 @@
+{
+  "id": "pop_ballad",
+  "label": "Pop Ballad",
+  "matchGenres": [
+    "pop ballad",
+    "ballad",
+    "emotional pop ballad",
+    "k-pop ballad",
+    "korean pop ballad"
+  ],
+  "blueprintGuidance": [
+    "Represent pop ballad: vocal-led emotional writing, familiar harmony, and a clear chorus lift.",
+    "Keep verse restraint, pre-chorus tension, and a wide but controlled chorus.",
+    "Use the separate mood field for setting details like rainy, lonely, hopeful, or nostalgic."
+  ],
+  "generationGuidance": [
+    "Use piano or electric piano, warm bass, soft drums, subtle pads or strings, and an upfront vocal.",
+    "Let the chorus open wider through harmony and dynamics, not through heavy percussion.",
+    "Keep the melody singable, direct, and emotionally centered.",
+    "For short-form output, reach the chorus quickly and avoid a long intro."
+  ],
+  "avoidGuidance": [
+    "Avoid rock drums, EDM drops, trap rolls, and cinematic trailer percussion.",
+    "Avoid over-singing every line or burying the lead vocal under harmonies."
+  ],
+  "defaultBpm": 82,
+  "defaultKey": "C minor",
+  "defaultDuration": 45
+}

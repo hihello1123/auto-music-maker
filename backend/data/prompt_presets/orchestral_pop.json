@@ -1,0 +1,29 @@
+{
+  "id": "orchestral_pop",
+  "label": "Orchestral Pop",
+  "matchGenres": [
+    "orchestral pop",
+    "cinematic pop",
+    "cinematic ballad",
+    "orchestral ballad",
+    "symphonic pop"
+  ],
+  "blueprintGuidance": [
+    "Represent orchestral pop: pop song structure with cinematic scale and controlled orchestral support.",
+    "Keep the vocal story simple and centered while the arrangement expands around it.",
+    "Use mood input for dramatic, hopeful, tragic, winter, farewell, or epic direction."
+  ],
+  "generationGuidance": [
+    "Use piano, low strings, soft orchestral swells, deep pads, and controlled cinematic percussion.",
+    "Keep the opening restrained, then widen the stereo field and harmony at the chorus.",
+    "Use long reverb tails and suspended textures while keeping the lead vocal intelligible.",
+    "For short-form output, reach the emotional rise quickly and avoid a long score-style setup."
+  ],
+  "avoidGuidance": [
+    "Avoid trailer-hit percussion, overblown brass, distorted impacts, and muddy low strings.",
+    "Avoid turning the track into ambient soundtrack without a pop hook."
+  ],
+  "defaultBpm": 72,
+  "defaultKey": "D minor",
+  "defaultDuration": 45
+}

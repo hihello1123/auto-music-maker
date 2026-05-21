@@ -61,7 +61,7 @@ class MusicServiceTests(unittest.TestCase):
         self.assertEqual(response.seed, 1234)
         self.assertEqual(response.promptFileId, "ace_step_prompt_001")
         self.assertEqual(response.musicPlanFileId, "music_plan_001")
-        self.assertEqual(response.promptPresetId, "emotional_pop_ballad")
+        self.assertEqual(response.promptPresetId, "pop_ballad")
         self.assertEqual(response.engine, "placeholder")
         self.assertEqual(loaded_job.status, JobStatus.completed)
         self.assertEqual(loaded_job.result["status"], "completed")
@@ -69,7 +69,7 @@ class MusicServiceTests(unittest.TestCase):
         self.assertEqual(len(loaded_project.assets.musicPlans), 1)
         self.assertEqual(len(loaded_project.assets.audioFiles), 3)
         self.assertIsNotNone(loaded_project.selectedAudioFile)
-        self.assertEqual(loaded_project.selectedPromptPreset, "emotional_pop_ballad")
+        self.assertEqual(loaded_project.selectedPromptPreset, "pop_ballad")
         self.assertIsNotNone(loaded_project.selectedMusicPlan)
         self.assertTrue((project_store.PROJECTS_DIR / loaded_project.assets.audioFiles[0].path).exists())
 
@@ -87,6 +87,7 @@ class MusicServiceTests(unittest.TestCase):
                     seed=1234,
                     count=1,
                     genre="ballad",
+                    mood="rainy late-night bar",
                     bpm=85,
                     key="C minor",
                 ),
@@ -96,10 +97,11 @@ class MusicServiceTests(unittest.TestCase):
             music_plan_service.ace_step_service.has_configured_api = original_has_api
 
         self.assertEqual(plan.musicPlanFileId, "music_plan_001")
-        self.assertEqual(plan.promptPresetId, "emotional_pop_ballad")
+        self.assertEqual(plan.promptPresetId, "pop_ballad")
+        self.assertIn("Mood: rainy late-night bar", plan.sourcePrompt)
         self.assertEqual(plan.engine, "local-fallback")
         self.assertEqual(len(loaded_project.assets.musicPlans), 1)
-        self.assertEqual(loaded_project.selectedPromptPreset, "emotional_pop_ballad")
+        self.assertEqual(loaded_project.selectedPromptPreset, "pop_ballad")
         self.assertEqual(loaded_project.selectedMusicPlan, "music_plan_001")
 
     def test_generate_music_uses_configured_ace_step_runner(self) -> None:
@@ -170,12 +172,12 @@ class MusicServiceTests(unittest.TestCase):
 
         self.assertEqual(response.engine, "ace-step-cli")
         self.assertEqual(response.musicPlanFileId, "music_plan_001")
-        self.assertEqual(response.promptPresetId, "emotional_pop_ballad")
+        self.assertEqual(response.promptPresetId, "pop_ballad")
         self.assertEqual(len(response.audioFileIds), 2)
         self.assertEqual(loaded_job.status, JobStatus.completed)
         self.assertEqual(loaded_job.result["engine"], "ace-step-cli")
         self.assertEqual(loaded_job.result["musicPlanFileId"], "music_plan_001")
-        self.assertEqual(loaded_job.result["promptPresetId"], "emotional_pop_ballad")
+        self.assertEqual(loaded_job.result["promptPresetId"], "pop_ballad")
         self.assertEqual(len(loaded_project.assets.audioFiles), 2)
         self.assertEqual(len(loaded_project.assets.musicPlans), 1)
 
@@ -247,11 +249,11 @@ class MusicServiceTests(unittest.TestCase):
 
         self.assertEqual(response.engine, "ace-step-api")
         self.assertEqual(response.musicPlanFileId, "music_plan_001")
-        self.assertEqual(response.promptPresetId, "emotional_pop_ballad")
+        self.assertEqual(response.promptPresetId, "pop_ballad")
         self.assertEqual(len(response.audioFileIds), 1)
         self.assertEqual(loaded_job.status, JobStatus.completed)
         self.assertEqual(loaded_job.result["engine"], "ace-step-api")
         self.assertEqual(loaded_job.result["musicPlanFileId"], "music_plan_001")
-        self.assertEqual(loaded_job.result["promptPresetId"], "emotional_pop_ballad")
+        self.assertEqual(loaded_job.result["promptPresetId"], "pop_ballad")
         self.assertEqual(len(loaded_project.assets.audioFiles), 1)
         self.assertEqual(len(loaded_project.assets.musicPlans), 1)
