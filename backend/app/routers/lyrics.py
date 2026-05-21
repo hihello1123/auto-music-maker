@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from app.models.lyrics import LyricsGenerateRequest, LyricsSaveRequest
+from app.models.lyrics import LyricsGenerateRequest, LyricsPreviewResponse, LyricsSaveRequest
 from app.models.project import ProjectAssetRecord
 from app.services import lyric_service
 
@@ -12,6 +12,17 @@ def generate_lyrics(project_id: str, data: LyricsGenerateRequest):
     """Ollama 기반 가사 후보 생성"""
     try:
         return lyric_service.generate_lyrics(project_id, data)
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+
+
+@router.post("/preview", response_model=LyricsPreviewResponse)
+def preview_lyrics(project_id: str, data: LyricsGenerateRequest):
+    """Ollama 기반 가사 초안 생성. 파일 저장은 하지 않는다."""
+    try:
+        return LyricsPreviewResponse(content=lyric_service.preview_lyrics(project_id, data))
     except ValueError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     except Exception as exc:

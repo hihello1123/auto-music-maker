@@ -1,5 +1,4 @@
 import json
-import re
 from datetime import datetime
 from pathlib import Path
 
@@ -32,15 +31,15 @@ def _next_version(project_id: str) -> int:
     return len(project.assets.lyricsVersions) + 1
 
 
-def _safe_label(label: str) -> str:
-    slug = re.sub(r"[^a-zA-Z0-9_-]+", "_", label.strip().lower()).strip("_")
-    return slug or "lyrics"
+def _display_label(label: str) -> str:
+    cleaned = label.strip()
+    return cleaned or "manual_edit"
 
 
 def _write_version_files(project_id: str, content: str, label: str) -> LyricsVersionRecord:
     version_number = _next_version(project_id)
     version = f"lyrics_v{version_number}"
-    safe_label = _safe_label(label)
+    display_label = _display_label(label)
     lyrics_dir = _lyrics_dir(project_id)
     metadata_dir = _metadata_dir(project_id)
     lyrics_dir.mkdir(parents=True, exist_ok=True)
@@ -56,7 +55,7 @@ def _write_version_files(project_id: str, content: str, label: str) -> LyricsVer
         json.dumps(
             {
                 "version": version,
-                "label": safe_label,
+                "label": display_label,
                 "filename": filename,
                 "createdAt": created_at.isoformat(),
             },
@@ -68,11 +67,26 @@ def _write_version_files(project_id: str, content: str, label: str) -> LyricsVer
 
     return LyricsVersionRecord(
         version=version,
-        label=safe_label,
+        label=display_label,
         filename=filename,
         contentPath=str(content_path.relative_to(project_store.PROJECTS_DIR)),
         metadataPath=str(metadata_path.relative_to(project_store.PROJECTS_DIR)),
         createdAt=created_at,
+    )
+
+
+def preview_lyrics(project_id: str, request_data) -> str:
+    project = project_store.get_project(project_id)
+    if not project:
+        raise ValueError(f"Project {project_id} not found")
+
+    return ollama_service.generate_lyrics(
+        model=request_data.model,
+        theme=request_data.theme or project.theme,
+        language=request_data.language or project.language,
+        style=request_data.style or project.genre,
+        instruction=request_data.instruction,
+        version_count=request_data.versionCount,
     )
 
 
@@ -81,14 +95,7 @@ def generate_lyrics(project_id: str, request_data) -> ProjectAssetRecord:
     if not project:
         raise ValueError(f"Project {project_id} not found")
 
-    content = ollama_service.generate_lyrics(
-        model=request_data.model,
-        theme=request_data.theme or project.theme,
-        language=request_data.language or project.language,
-        style=request_data.style or project.genre,
-        instruction=request_data.instruction,
-        version_count=request_data.versionCount,
-    )
+    content = preview_lyrics(project_id, request_data)
     version_record = _write_version_files(project_id, content, label="generated")
     asset_record = ProjectAssetRecord(
         id=version_record.version,

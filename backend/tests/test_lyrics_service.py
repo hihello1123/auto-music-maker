@@ -25,13 +25,15 @@ class LyricsServiceTests(unittest.TestCase):
     def test_save_lyrics_creates_versioned_file_and_updates_project(self) -> None:
         project = project_service.create_project(ProjectCreate(title="Lyric Project"))
 
-        asset = lyric_service.save_lyrics(project.id, "line one\nline two", "manual edit")
+        asset = lyric_service.save_lyrics(project.id, "line one\nline two", "내가 적은 라벨")
         loaded = project_service.get_project(project.id)
 
         self.assertEqual(asset.id, "lyrics_v1")
+        self.assertEqual(asset.label, "내가 적은 라벨")
         self.assertEqual(loaded.selectedLyricsVersion, "lyrics_v1")
         self.assertEqual(len(loaded.assets.lyricsVersions), 1)
         self.assertTrue((project_store.PROJECTS_DIR / project.id / "lyrics" / "lyrics_v1.md").exists())
+        self.assertEqual(loaded.assets.lyricsVersions[0].label, "내가 적은 라벨")
 
     @patch("app.services.ollama_service.generate_lyrics", return_value="Verse 1\nChorus")
     def test_generate_lyrics_uses_ollama_and_updates_project(self, mock_generate) -> None:
@@ -47,4 +49,3 @@ class LyricsServiceTests(unittest.TestCase):
         self.assertEqual(asset.id, "lyrics_v1")
         self.assertEqual(loaded.selectedLyricsVersion, "lyrics_v1")
         self.assertEqual(loaded.assets.lyricsVersions[0].filename, "lyrics_v1.md")
-

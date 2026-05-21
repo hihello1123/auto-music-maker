@@ -17,6 +17,10 @@ class LyricsSaveRequest(BaseModel):
     label: str = "manual_edit"
 
 
+class LyricsPreviewResponse(BaseModel):
+    content: str
+
+
 class LyricsVersionRecord(BaseModel):
     version: str
     label: str
@@ -24,4 +28,3 @@ class LyricsVersionRecord(BaseModel):
     contentPath: str
     metadataPath: str
     createdAt: datetime = Field(default_factory=datetime.now)
-

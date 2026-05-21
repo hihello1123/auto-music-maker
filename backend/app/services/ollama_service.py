@@ -1,4 +1,5 @@
 import json
+import re
 from urllib import error, request
 
 from app.config import OLLAMA_MODEL, OLLAMA_TIMEOUT, OLLAMA_URL
@@ -6,6 +7,15 @@ from app.config import OLLAMA_MODEL, OLLAMA_TIMEOUT, OLLAMA_URL
 
 class OllamaServiceError(RuntimeError):
     pass
+
+
+def _language_instruction(language: str) -> str:
+    normalized = (language or "en").strip().lower()
+    if normalized in {"ko", "kr", "korean", "한국어"}:
+        return "Target language: Korean only. Write every lyric line in Korean. Do not write English lyric lines."
+    if normalized in {"mixed", "ko-en", "en-ko", "bilingual", "혼합"}:
+        return "Target language: Korean-English mixed. Blend Korean and English naturally in the lyrics."
+    return "Target language: English only. Write every lyric line in English. Do not write Korean lyric lines."
 
 
 def _build_prompt(
@@ -16,9 +26,9 @@ def _build_prompt(
     version_count: int,
 ) -> str:
     parts = [
-        "You are a lyric writer.",
-        f"Language: {language}",
-        f"Generate {version_count} candidate lyric versions.",
+        "Write a fresh lyric draft from scratch.",
+        "Do not reuse or continue any previous draft.",
+        f"Generate {version_count} candidate lyric version(s).",
     ]
     if theme:
         parts.append(f"Theme: {theme}")
@@ -26,8 +36,52 @@ def _build_prompt(
         parts.append(f"Style: {style}")
     if instruction:
         parts.append(f"Instruction: {instruction}")
-    parts.append("Return markdown only.")
+    parts.append(_language_instruction(language))
+    parts.append("Output rules: no explanation, no reasoning, no code fences, no markdown wrapper, no commentary.")
+    parts.append("Use only the requested language in lyric lines.")
+    parts.append("If you use sections, use short headings like [Verse 1], [Pre-Chorus], [Chorus], [Bridge], [Outro].")
     return "\n".join(parts)
+
+
+def _clean_model_content(content: str) -> str:
+    cleaned = re.sub(r"<think>.*?</think>", "", content, flags=re.DOTALL | re.IGNORECASE).strip()
+    fence_match = re.fullmatch(r"```(?:markdown|md)?\s*(.*?)\s*```", cleaned, flags=re.DOTALL | re.IGNORECASE)
+    if fence_match:
+        cleaned = fence_match.group(1).strip()
+    return cleaned
+
+
+def _build_messages(
+    *,
+    theme: str | None,
+    language: str,
+    style: str | None,
+    instruction: str | None,
+    version_count: int,
+) -> list[dict[str, str]]:
+    return [
+        {
+            "role": "system",
+            "content": "\n".join(
+                [
+                    "You are a strict lyric generation engine.",
+                    "Return only the lyric text.",
+                    "Do not output reasoning, analysis, summaries, or code fences.",
+                    "Do not mention previous drafts or internal thinking.",
+                ]
+            ),
+        },
+        {
+            "role": "user",
+            "content": _build_prompt(
+                theme=theme,
+                language=language,
+                style=style,
+                instruction=instruction,
+                version_count=version_count,
+            ),
+        },
+    ]
 
 
 def generate_lyrics(
@@ -40,15 +94,15 @@ def generate_lyrics(
     version_count: int = 1,
 ) -> str:
     selected_model = model or OLLAMA_MODEL
-    prompt = _build_prompt(theme, language, style, instruction, version_count)
     payload = {
         "model": selected_model,
-        "messages": [
-            {
-                "role": "user",
-                "content": prompt,
-            }
-        ],
+        "messages": _build_messages(
+            theme=theme,
+            language=language,
+            style=style,
+            instruction=instruction,
+            version_count=version_count,
+        ),
         "stream": False,
     }
 
@@ -69,4 +123,4 @@ def generate_lyrics(
     if not content:
         raise OllamaServiceError("Ollama response did not include message.content")
 
-    return content.strip()
+    return _clean_model_content(content)

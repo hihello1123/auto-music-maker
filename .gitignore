@@ -15,6 +15,10 @@ frontend/.next/
 .env.local
 *.log
 
+# Local generated project data
+backend/data/projects/*
+!backend/data/projects/placeholder.txt
+
 # External dependency checkout
 external/ACE-Step-1.5/
 

@@ -22,6 +22,8 @@ export type Project = {
   selectedMusicPlan?: string | null;
   selectedAudioFile?: string | null;
   selectedLrcFile?: string | null;
+  createdAt?: string;
+  updatedAt?: string;
   assets: {
     lyricsVersions: ProjectAssetRecord[];
     promptFiles: ProjectAssetRecord[];
@@ -38,6 +40,24 @@ export type ProjectCreate = {
   title: string;
   theme?: string | null;
   language?: string;
+};
+
+export type LyricsGenerateRequest = {
+  model?: string | null;
+  theme?: string | null;
+  language?: string;
+  style?: string | null;
+  instruction?: string | null;
+  versionCount?: number;
+};
+
+export type LyricsSaveRequest = {
+  content: string;
+  label?: string;
+};
+
+export type LyricsPreviewResponse = {
+  content: string;
 };
 
 export type PromptPreset = {
@@ -98,7 +118,7 @@ export type MusicGenerateResponse = {
   createdAt: string;
 };
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:12000";
+export const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:12000";
 
 async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${API_BASE}${path}`, {
@@ -121,6 +141,37 @@ export async function listProjects(): Promise<Project[]> {
 
 export async function createProject(body: ProjectCreate): Promise<Project> {
   return requestJson<Project>("/projects", {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+}
+
+export async function deleteProject(projectId: string): Promise<void> {
+  const response = await fetch(`${API_BASE}/projects/${projectId}`, {
+    method: "DELETE",
+    cache: "no-store",
+  });
+  if (!response.ok) {
+    throw new Error(`Request failed: ${response.status}`);
+  }
+}
+
+export async function generateLyrics(projectId: string, body: LyricsGenerateRequest): Promise<ProjectAssetRecord> {
+  return requestJson<ProjectAssetRecord>(`/projects/${projectId}/lyrics/generate`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+}
+
+export async function previewLyrics(projectId: string, body: LyricsGenerateRequest): Promise<LyricsPreviewResponse> {
+  return requestJson<LyricsPreviewResponse>(`/projects/${projectId}/lyrics/preview`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+}
+
+export async function saveLyrics(projectId: string, body: LyricsSaveRequest): Promise<ProjectAssetRecord> {
+  return requestJson<ProjectAssetRecord>(`/projects/${projectId}/lyrics/save`, {
     method: "POST",
     body: JSON.stringify(body),
   });
